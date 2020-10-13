@@ -9,7 +9,10 @@ export default class VideoPlayer extends Component {
     super(props);
     this.video = props.route.params.video;
     this.fileType = props.route.params.fileType;
+    props.navigation.setOptions({ title: this.fileType=='video'?'Video Player':'Audio player' })
   }
+
+ 
 
   render() {
     let cover = this.video.cover;

@@ -4,6 +4,7 @@ import VideoScreen from '../Container/VideoScreen';
 import StreemingScreen from '../Container/StreemingScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import VideoPlay from '../Component/VideoPlay';
+import SplashScreen from '../Container/SplashScreen';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Tab = createMaterialTopTabNavigator();
@@ -12,12 +13,16 @@ const Stack = createStackNavigator();
 function screenStack() {
   return (
     <Stack.Navigator >
+      <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
       <Stack.Screen
         name="tabStack"
         component={tabStack}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="VideoPlay" component={VideoPlay} />
+      <Stack.Screen
+      
+       name="VideoPlay" component={VideoPlay} />
+
     </Stack.Navigator>
   );
 }

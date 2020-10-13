@@ -43,9 +43,9 @@ export default function AudioScreen({navigation}) {
         });
     } else {
       MusicFiles.getAll({
-        blured: true, // works only when 'cover' is set to true
+        blured: true, 
         artist: true,
-        duration: true, //default : true
+        duration: true,
         genre: true,
         title: true,
         cover: true,
