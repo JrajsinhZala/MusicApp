@@ -34,7 +34,10 @@ export default function HomeNavigator(props) {
   return (
 
     <Stack.Navigator>
-      <Stack.Screen name="screenStack" component={screenStack} options={{ Headers: null }} />
+      <Stack.Screen
+        name="screenStack"
+        component={screenStack}
+        screenOptions={{ headerShown: false }} />
     </Stack.Navigator>
 
   );

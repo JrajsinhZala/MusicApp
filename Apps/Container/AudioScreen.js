@@ -34,14 +34,12 @@ export default function AudioScreen({ navigation }) {
                 blured: true, // works only when 'cover' is set to true
                 artist: true,
                 duration: true, //default : true
-                cover: false, //default : true,
                 genre: true,
                 title: true,
                 cover: true,
                 minimumSongDuration: 10000, // get songs bigger than 10000 miliseconds duration,
                 fields: ['title', 'albumTitle', 'genre', 'lyrics', 'artwork', 'duration'] // for iOs Version
-            }).then(tracks => {
-              
+            }).then(tracks => { 
                 setAudio(tracks)
             }).catch(error => {
                 console.log('error', error);

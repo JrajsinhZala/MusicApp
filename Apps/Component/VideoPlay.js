@@ -1,51 +1,55 @@
 
 import React, { useEffect, useState, Component } from 'react';
-import { StyleSheet, SafeAreaView, Platform, View } from 'react-native';
+import { StyleSheet, Dimensions, Platform, View } from 'react-native';
 import Video from 'react-native-video';
-
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 export default class VideoPlayer extends Component {
     constructor(props) {
         super(props);
         this.video = props.route.params.video
         this.fileType = props.route.params.fileType
-        console.log('====================================');
-        console.log(props.route.params);
-        console.log('====================================');
     }
 
     render() {
-        console.log('file',Platform.OS == 'android' ? `file://${this.video.path}` : this.video.path);
+        console.log('file', Platform.OS == 'android' ? `file://${this.video.path}` : this.video.path);
         return (
             <View style={styles.container}>
                 <Video
-                    audioOnly={this.fileType == 'video' ? false : true}
+                    
                     source={{ uri: Platform.OS == 'android' ? `file://${this.video.path}` : this.video.path }}
                     onBuffer={(data) => { console.log(data); }}
                     onError={(data) => { console.log(data); }}
-                    style={styles.backgroundVideo}
+                    style={Platform.OS === "android" ? styles.videoContainerAndroid : styles.videoContainerIOS}
+                    resizeMode="contain"
                 />
             </View>
         );
     }
 }
 
-
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: 'black',
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
     },
-    fullScreen: {
-        backgroundColor: 'green',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
+    videoContainerAndroid: {
+        height: "100%",
+        width: "100%"
     },
+    videoContainerIOS: {
+        width: Dimensions.get('window').height,
+        height: Dimensions.get('window').width,
+        minWidth: Dimensions.get('window').height,
+        minHeight: Dimensions.get('window').width,
+        width: Dimensions.get('screen').height,
+        height: Dimensions.get('screen').width,
+
+        transform: [{ rotate: '90deg' }],
+    }
 });
 
 
