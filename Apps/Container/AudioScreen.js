@@ -1,13 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, Text, View, Platform} from 'react-native';
+import {
+  SafeAreaView,
+  Text,
+  View,
+  Platform,
+  ActivityIndicator,
+} from 'react-native';
 import Audio from '../Component/Audio';
 import MusicFiles, {RNAndroidAudioStore} from 'react-native-get-music-files';
 
 export default function AudioScreen({navigation}) {
   const [audio, setAudio] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (Platform.OS == 'android') {
+      setLoading(true);
       RNAndroidAudioStore.getAll({
         blured: true, // works only when 'cover' is set to true
         artist: true,
@@ -27,6 +35,7 @@ export default function AudioScreen({navigation}) {
       })
         .then((tracks) => {
           console.log('tracks', tracks);
+          setLoading(false);
           setAudio(tracks);
         })
         .catch((error) => {
@@ -59,10 +68,16 @@ export default function AudioScreen({navigation}) {
         });
     }
   }, []);
-
+  renderList = () => {
+    if (loading) {
+      return <ActivityIndicator color="black" />;
+    } else {
+      return <Audio list={audio} navigation={navigation} />;
+    }
+  };
   return (
     <SafeAreaView style={{flex: 1, marginTop: 10}}>
-      <Audio list={audio} navigation={navigation} />
+      {this.renderList()}
     </SafeAreaView>
   );
 }
