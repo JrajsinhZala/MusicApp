@@ -17,7 +17,6 @@ export default function AudioScreen({navigation}) {
     if (Platform.OS == 'android') {
       setLoading(true);
       RNAndroidAudioStore.getAll({
-        blured: true, // works only when 'cover' is set to true
         artist: true,
         duration: true, //default : true
         genre: true,
@@ -43,7 +42,7 @@ export default function AudioScreen({navigation}) {
         });
     } else {
       MusicFiles.getAll({
-        blured: true, 
+        blured: true,
         artist: true,
         duration: true,
         genre: true,
@@ -68,16 +67,27 @@ export default function AudioScreen({navigation}) {
         });
     }
   }, []);
-  renderList = () => {
-    if (loading) {
-      return <ActivityIndicator color="black" />;
-    } else {
-      return <Audio list={audio} navigation={navigation} />;
-    }
-  };
+
   return (
     <SafeAreaView style={{flex: 1, marginTop: 10}}>
-      {this.renderList()}
+      {loading ? (
+        <View
+          style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center'}}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text
+              style={{
+                padding: 10,
+                fontSize: 18,
+                flex: 1,
+              }}>
+              Scanning Audio Files....
+            </Text>
+            <ActivityIndicator color="black" style={{padding: 10}} />
+          </View>
+        </View>
+      ) : (
+        <Audio list={audio} navigation={navigation} />
+      )}
     </SafeAreaView>
   );
 }

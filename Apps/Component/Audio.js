@@ -6,7 +6,9 @@ import {
   FlatList,
   StyleSheet,
   Platform,
+  Image,
 } from 'react-native';
+import icons from '../resources/icons';
 
 export default function Audio(props) {
   const playFile = (video) => {
@@ -16,7 +18,12 @@ export default function Audio(props) {
     });
   };
   const EmptyListMessage = ({item}) => {
-    return <Text style={styles.emptyListStyle}>No Audio Found</Text>;
+    return (
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Image source={icons.audio} style={{width: 100, height: 100}} />
+        <Text style={styles.emptyListStyle}>No Audios Found</Text>
+      </View>
+    );
   };
 
   const renderItem = (item, index) => {
@@ -37,18 +44,33 @@ export default function Audio(props) {
 
     return (
       <TouchableWithoutFeedback onPress={() => playFile(song)}>
-        <View style={styles.songInfo}>
-          <View>
-            <Text style={styles.songTitle} numberOfLines={1}>
-              {song.title}
-            </Text>
-          </View>
-          <View style={styles.songView}>
-            <Text style={styles.songAlbum} numberOfLines={1}>
-              {album}
-            </Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            padding: 10,
+            marginStart: 10,
+            marginEnd: 10,
+            marginBottom: 10,
+            backgroundColor: '#FFFFFF',
+            borderRadius: 6,
+          }}>
+          <Image source={{uri: song.cover}} style={{width: 30, height: 30,borderRadius:4}} />
+          <View style={styles.songInfo}>
             <View>
-              <Text style={styles.songDuration}>{minutes + ':' + seconds}</Text>
+              <Text style={styles.songTitle} numberOfLines={1}>
+                {song.title}
+              </Text>
+            </View>
+            <View style={styles.songView}>
+              <Text style={styles.songAlbum} numberOfLines={1}>
+                {album}
+              </Text>
+              <View>
+                <Text style={styles.songDuration}>
+                  {minutes + ':' + seconds}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -71,25 +93,22 @@ export default function Audio(props) {
 }
 const styles = StyleSheet.create({
   songInfo: {
-    marginTop: 1,
-    borderBottomColor: '#737373',
-    paddingTop: 3,
-    borderBottomWidth: 0.6,
     justifyContent: 'space-between',
-    padding: 10,
-    margin: 10,
+    marginStart: 5,
+    flex: 1,
   },
   songView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
+    marginTop: 5,
   },
-  songTitle: {color: '#b3b3b3', overflow: 'hidden'},
-  songAlbum: {color: '#737373', overflow: 'hidden', width: '60%'},
-  songDuration: {color: '#b3b3b3', fontSize: 16},
+  songTitle: {color: '#000000', overflow: 'hidden'},
+  songAlbum: {color: '#000000', overflow: 'hidden', width: '60%'},
+  songDuration: {color: '#000000', fontSize: 16},
   emptyListStyle: {
     padding: 10,
     fontSize: 18,
     textAlign: 'center',
+    fontWeight: 'bold',
   },
 });

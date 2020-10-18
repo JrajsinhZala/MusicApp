@@ -79,13 +79,7 @@ export default function VideoScreen({navigation}) {
       }
     } catch (e) {}
   };
-  renderList = () => {
-    if (loading) {
-      return <ActivityIndicator color="black" />;
-    } else {
-      return <Audio list={audio} navigation={navigation} />;
-    }
-  };
+
   return (
     <View style={styles.container}>
       {select ? (

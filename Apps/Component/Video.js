@@ -5,13 +5,22 @@ import {
   TouchableWithoutFeedback,
   FlatList,
   StyleSheet,
-  SafeAreaView,
+  Image
 } from 'react-native';
+import icons from '../resources/icons';
 import VideoPlay from './VideoPlay';
 
 export default function Video(props) {
   const EmptyListMessage = ({item}) => {
-    return <Text style={styles.emptyListStyle}>No Videos Found</Text>;
+    return (
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Image
+          source={icons.video}
+          style={{width: 100, height: 100}}
+        />
+        <Text style={styles.emptyListStyle}>No Videos Found</Text>
+      </View>
+    );
   };
   const renderItem = (item, index) => {
     let video = item.item;
@@ -65,25 +74,26 @@ export default function Video(props) {
 
 const styles = StyleSheet.create({
   songInfo: {
-    marginTop: 1,
-    borderBottomColor: '#737373',
-    paddingTop: 3,
-    borderBottomWidth: 0.6,
     justifyContent: 'space-between',
     padding: 10,
-    margin: 10,
+    marginStart: 10,
+    marginEnd: 10,
+    marginBottom: 10,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 6,
   },
   songView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
+    marginTop: 5,
   },
-  songTitle: {color: '#b3b3b3', overflow: 'hidden'},
-  songAlbum: {color: '#737373', overflow: 'hidden', width: '60%'},
-  songDuration: {color: '#b3b3b3', fontSize: 16},
+  songTitle: {color: '#000000', overflow: 'hidden'},
+  songAlbum: {color: '#000000', overflow: 'hidden', width: '60%'},
+  songDuration: {color: '#000000', fontSize: 16},
   emptyListStyle: {
     padding: 10,
     fontSize: 18,
     textAlign: 'center',
+    fontWeight:'bold'
   },
 });
