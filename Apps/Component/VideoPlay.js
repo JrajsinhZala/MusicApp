@@ -17,7 +17,7 @@ export default class VideoPlayer extends Component {
         return (
             <View style={styles.container}>
                 <Video
-                    
+                    audioOnly={this.fileType == 'video' ? false : true}
                     source={{ uri: Platform.OS == 'android' ? `file://${this.video.path}` : this.video.path }}
                     onBuffer={(data) => { console.log(data); }}
                     onError={(data) => { console.log(data); }}

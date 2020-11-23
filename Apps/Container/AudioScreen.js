@@ -39,7 +39,8 @@ export default function AudioScreen({ navigation }) {
                 cover: true,
                 minimumSongDuration: 10000, // get songs bigger than 10000 miliseconds duration,
                 fields: ['title', 'albumTitle', 'genre', 'lyrics', 'artwork', 'duration'] // for iOs Version
-            }).then(tracks => { 
+            }).then(tracks => {
+              
                 setAudio(tracks)
             }).catch(error => {
                 console.log('error', error);
